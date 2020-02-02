@@ -5,7 +5,8 @@ const sizes = {
   desktop: 1025,
   tablet: 769,
   phone: 550,
-  android: 365
+  android: 365,
+  small: 340
 };
 
 export const media = Object.keys(sizes).reduce((acc, label) => {
@@ -16,9 +17,6 @@ export const media = Object.keys(sizes).reduce((acc, label) => {
   `;
   return acc;
 }, {});
-
-
-
 
 export const mediaType = Object.keys(sizes).reduce((acc, label) => {
   acc[label] = window.matchMedia(`(max-width: ${sizes[label]}px)`).matches;

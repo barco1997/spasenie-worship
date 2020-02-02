@@ -4,6 +4,14 @@
   font-weight: 700;
   font-style: normal;
 }
+
+@font-face {
+  font-family: "Arial";
+  src: local("Arial"), url("Arial.ttf");
+  font-weight: normal;
+  font-style: normal;
+}
+
 @font-face {
   font-family: "Futurica-Black";
   src: local("Futurica-Black"), url("a_FuturicaBlack.ttf");

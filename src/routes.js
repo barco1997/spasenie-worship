@@ -1,11 +1,15 @@
-//import React from "react";
+import React from "react";
 
 //import styled from "styled-components";
 import App from "./containers/App";
 import HomePage from "./containers/HomePage";
+import AlbumPage from "./containers/AlbumPage";
+import AboutPage from "./containers/AboutPage";
+import DonationPage from "./containers/DonationPage";
+import ContactPage from "./containers/ContactPage";
 import { VIEWS } from "./constants";
 import { getPath } from "./helpers/pathHelpers";
-//import { Redirect } from "react-router-dom";
+import { Redirect } from "react-router-dom";
 export const routes = [
   {
     path: getPath(VIEWS.MAIN),
@@ -14,7 +18,7 @@ export const routes = [
       {
         path: getPath(VIEWS.HOME),
         component: HomePage
-      } /*,
+      },
       {
         path: getPath(VIEWS.ALBUM),
         component: AlbumPage
@@ -24,13 +28,17 @@ export const routes = [
         component: AboutPage
       },
       {
-        path: getPath(VIEWS.Contact),
-        component: ContactPage
-      },
-      {
         path: getPath(VIEWS.DONATE),
         component: DonationPage
-      }*/
+      },
+      {
+        path: getPath(VIEWS.CONTACT),
+        component: ContactPage
+      }
     ]
+  },
+  {
+    path: "/",
+    component: () => <Redirect from="*" exact to={getPath(VIEWS.HOME)} />
   }
 ];

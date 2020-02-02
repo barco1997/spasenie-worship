@@ -5,6 +5,7 @@ import speakupPhoto from "../../static/img/speakup.jpg";
 import AlbumButton from "../../components/AlbumButton";
 import { VIEWS, minIconMapping } from "../../constants";
 import { getPath } from "../../helpers/pathHelpers";
+import { media } from "../../utils/media";
 const Background = styled.div`
   background: url(${props => props.src}) !important;
   background-repeat: no-repeat !important;
@@ -23,6 +24,10 @@ const SpeakUp = styled.img`
   cursor: pointer;
   margin-bottom: 15px;
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  ${media.tablet`
+  height: 80vw;
+  width: 80vw;
+  `};
 `;
 
 const Midlle = styled.div`
@@ -47,7 +52,7 @@ function HomePage() {
       <Midlle>
         <SpeakUp src={speakupPhoto} />
 
-        <AlbumButton to={getPath(VIEWS.HOME)} noSelection padding="10px">
+        <AlbumButton to={getPath(VIEWS.ALBUM)} noSelection padding="10px">
           АЛЬБОМ&nbsp;В&nbsp;СЕТИ
         </AlbumButton>
       </Midlle>
