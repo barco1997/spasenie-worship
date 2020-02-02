@@ -1,0 +1,32 @@
+@font-face {
+  font-family: "Arial";
+  src: local("Arial-Bold"), url("arialbd.ttf");
+  font-weight: 700;
+  font-style: normal;
+}
+@font-face {
+  font-family: "Futurica-Black";
+  src: local("Futurica-Black"), url("a_FuturicaBlack.ttf");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Futurica-Black";
+  src: local("Futurica-Black-Italic"), url("a_FuturicaBlack_Italic.ttf");
+  font-weight: normal;
+  font-style: italic;
+}
+/*@font-face {
+  font-family: "Montserrat";
+  src: local("Montserrat-Medium"), url("Montserrat-Medium.ttf");
+  font-weight: 500;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Montserrat";
+  src: local("Montserrat-Bold"), url("Montserrat-Bold.ttf");
+  font-weight: 700;
+  font-style: normal;
+}*/
