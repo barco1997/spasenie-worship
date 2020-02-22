@@ -46,7 +46,7 @@ const BottomRow = styled.div`
   margin-top: 10px;
 `;
 
-function HomePage() {
+function HomePage(props) {
   return (
     <Background src={backgroundPic}>
       <Midlle>

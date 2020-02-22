@@ -153,7 +153,7 @@ const StyledDrawer = styled(Drawer)`
 `;
 
 function NavBar() {
-  const [isOpen, setIsOpen] = useState(0);
+  const [isOpen, setIsOpen] = useState(false);
   return (
     <Wrapper>
       <InnerWrapper>
@@ -188,24 +188,28 @@ function NavBar() {
               <MobileMenuWrapper>
                 <MobileMenuItem
                   to={getPath(VIEWS.ALBUM)}
+                  onClick={() => setIsOpen(false)}
                   activeClassName="selected"
                 >
                   АЛЬБОМ
                 </MobileMenuItem>
                 <MobileMenuItem
                   to={getPath(VIEWS.ABOUT)}
+                  onClick={() => setIsOpen(false)}
                   activeClassName="selected"
                 >
                   O&nbsp;НАС
                 </MobileMenuItem>
                 <MobileMenuItem
                   to={getPath(VIEWS.CONTACT)}
+                  onClick={() => setIsOpen(false)}
                   activeClassName="selected"
                 >
                   КОНТАКТ
                 </MobileMenuItem>
                 <MobileMenuItem
                   to={getPath(VIEWS.DONATE)}
+                  onClick={() => setIsOpen(false)}
                   activeClassName="selected"
                 >
                   ПОЖЕРТВОВАТЬ

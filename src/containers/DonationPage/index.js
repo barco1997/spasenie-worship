@@ -1,2 +1,5 @@
 import DonationPage from "./DonationPage";
-export default DonationPage;
+import { VIEWS } from "../../constants";
+import { getPath } from "../../helpers/pathHelpers";
+import withSpaRouter from "../../utils/withSpaRouter";
+export default withSpaRouter(DonationPage, getPath(VIEWS.DONATE));
