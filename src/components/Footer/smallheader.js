@@ -3,28 +3,21 @@ import styled from "styled-components";
 import { NavLink } from "react-router-dom";
 const Wrapper = styled(NavLink)`
   text-decoration: none;
-  color: white;
+  color: #ffffff;
   display: flex;
   align-items: center;
-
-  margin: 0px 20px;
-  padding-top: ${props => (props.isSticky ? "0px" : "10px")};
+  opacity: 0.7;
+  margin: 0px 10px;
+  padding: 2px 0px;
   height: 100%;
-  position: relative;
+  width: fit-content;
   &:hover,
   &.selected {
+    opacity: 1;
     color: #ffffff;
     text-decoration: none;
-    &:after {
-      content: "";
-      position: absolute;
-      left: 0;
-      top: 0;
-      margin-left: 5px;
-      margin-right: 5px;
-      width: calc(100% - 16px);
-      border-bottom: solid 3px white;
-    }
+    padding-bottom: 1px;
+    border-bottom: solid 1px white;
   }
 `;
 
@@ -33,14 +26,15 @@ const Text = styled.span`
   font-weight: 700;
   font-style: normal;
   transform: scaleY(0.9);
-  font-size: 20px;
-  line-height: 25px;
+  font-size: 16px;
+  line-height: 20px;
   letter-spacing: 0.2em;
+
   cursor: pointer;
 `;
-export default function SubHeader(props) {
+export default function SmallHeader(props) {
   return (
-    <Wrapper to={props.to} activeClassName="selected" isSticky={props.isSticky}>
+    <Wrapper to={props.to}>
       <Text>{props.children}</Text>
     </Wrapper>
   );

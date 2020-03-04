@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import styled from "styled-components";
 import SubHeader from "../SubHeader";
 import { VIEWS } from "../../constants";
@@ -11,12 +11,19 @@ import MobileMenuItem from "../MobileMenuItem";
 const Wrapper = styled.div`
   display: flex;
   width: 100%;
-  position: absolute;
+  position: ${props => (props.isSticky ? "fixed" : "absolute")};
   top: 0;
   left: 0;
-  height: 80px;
+  z-index: 5000;
+  background: ${props => (props.isSticky ? "#101010" : "none")};
+  box-shadow: ${props =>
+    props.isSticky ? "0px 4px 4px rgba(0, 0, 0, 0.25)" : "none"};
+  height: ${props => (props.isSticky ? "70px" : "80px")};
   ${media.desktop`
+    box-shadow: none;
     height: 120px; 
+    position: absolute;
+    background: none;
   `};
 `;
 
@@ -29,7 +36,7 @@ const InnerWrapper = styled.div`
 
 const LogoWrapper = styled.div`
   position: absolute;
-  top: 25px;
+  top: ${props => (props.isSticky ? "10px" : "20px")};
   left: 50px;
   display: flex;
   ${media.desktop`
@@ -43,7 +50,7 @@ const LogoWrapper = styled.div`
   `};
   ${media.tablet`
   top: 15px;
-    
+  
   `};
 `;
 
@@ -86,9 +93,9 @@ const MobileMenuWrapper = styled.ul`
 `;
 
 const Burger = styled.div`
-  position: absolute;
+  position: fixed;
   top: 65px;
-  right: 20px;
+  right: 30px;
 
   display: none;
 
@@ -98,6 +105,9 @@ const Burger = styled.div`
   transform: rotate(0deg);
   transition: 0.5s ease-in-out;
   ${media.desktop`display: block;`};
+  ${media.phone`right: 20px;
+  top: 65px;
+  `};
   cursor: pointer;
   span {
     display: block;
@@ -154,19 +164,42 @@ const StyledDrawer = styled(Drawer)`
 
 function NavBar() {
   const [isOpen, setIsOpen] = useState(false);
+  const [isSticky, setIsSticky] = useState(false);
+  const sticky = useRef();
+  const myFunction = () => {
+    if (window.pageYOffset >= sticky.current.offsetTop + 10) {
+      setIsSticky(true);
+    } else {
+      setIsSticky(false);
+    }
+  };
+  useEffect(() => {
+    document.addEventListener("scroll", myFunction);
+    return () => {
+      document.removeEventListener("scroll", myFunction);
+    };
+  });
   return (
-    <Wrapper>
+    <Wrapper ref={sticky} isSticky={isSticky}>
       <InnerWrapper>
-        <LogoWrapper>
+        <LogoWrapper isSticky={isSticky}>
           <LogoInnerWrapper to={getPath(VIEWS.HOME)}>
             <Image src={Logo} />
           </LogoInnerWrapper>
         </LogoWrapper>
         <NavRow>
-          <SubHeader to={getPath(VIEWS.ALBUM)}>АЛЬБОМ</SubHeader>
-          <SubHeader to={getPath(VIEWS.ABOUT)}>O&nbsp;НАС</SubHeader>
-          <SubHeader to={getPath(VIEWS.CONTACT)}>КОНТАКТ</SubHeader>
-          <SubHeader to={getPath(VIEWS.DONATE)}>ПОЖЕРТВОВАТЬ</SubHeader>
+          <SubHeader isSticky={isSticky} to={getPath(VIEWS.ALBUM)}>
+            АЛЬБОМ
+          </SubHeader>
+          <SubHeader isSticky={isSticky} to={getPath(VIEWS.ABOUT)}>
+            O&nbsp;НАС
+          </SubHeader>
+          <SubHeader isSticky={isSticky} to={getPath(VIEWS.CONTACT)}>
+            КОНТАКТ
+          </SubHeader>
+          <SubHeader isSticky={isSticky} to={getPath(VIEWS.DONATE)}>
+            ПОЖЕРТВОВАТЬ
+          </SubHeader>
         </NavRow>
         <Burger open={isOpen} onClick={() => setIsOpen(!isOpen)}>
           <span />
@@ -186,6 +219,13 @@ function NavBar() {
           <div style={{ width: "100%" }}>
             <div style={{ padding: "2em" }}>
               <MobileMenuWrapper>
+                <MobileMenuItem
+                  to={getPath(VIEWS.HOME)}
+                  onClick={() => setIsOpen(false)}
+                  activeClassName="selected"
+                >
+                  ГЛАВНАЯ
+                </MobileMenuItem>
                 <MobileMenuItem
                   to={getPath(VIEWS.ALBUM)}
                   onClick={() => setIsOpen(false)}

@@ -1,6 +1,6 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
-import backgroundPic from "../../static/img/web_fon_02.jpg";
+import backgroundPic from "../../static/img/web_fon_03.jpg";
 
 import Header from "../../components/Header";
 import Paragraph from "../../components/Paragraph";
@@ -50,9 +50,25 @@ const Email = styled.div`
   `};
 `;
 
-function ContactPage() {
+function ContactPage(props) {
+  const initialState = {
+    image: null
+  };
+  const [image, setImage] = useState(initialState.image);
+  useEffect(() => {
+    if (!image) {
+      let preloaderImg = document.createElement("img");
+      preloaderImg.src = backgroundPic;
+
+      preloaderImg.addEventListener("load", event => {
+        setImage(backgroundPic);
+        props.handleLoad();
+        preloaderImg = null;
+      });
+    }
+  });
   return (
-    <Background src={backgroundPic}>
+    <Background src={image}>
       <Midlle>
         <InfoWrapper>
           <Header>СВЯЗАТЬСЯ:</Header>

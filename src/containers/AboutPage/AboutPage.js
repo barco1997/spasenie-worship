@@ -1,11 +1,11 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import backgroundPic from "../../static/img/web_fon_02.jpg";
 
 import Header from "../../components/Header";
 import Paragraph from "../../components/Paragraph";
 const Background = styled.div`
-  background: url(${props => props.src}) !important;
+  background: ${props => (props.src ? `url(${props.src})` : "none")} !important;
   background-repeat: no-repeat !important;
   background-size: cover !important;
   display: flex;
@@ -30,9 +30,24 @@ const InfoWrapper = styled.div`
   width: 100%;
 `;
 
-function AboutPage() {
+function AboutPage(props) {
+  const initialState = {
+    image: null
+  };
+  const [image, setImage] = useState(initialState.image);
+  useEffect(() => {
+    if (!image) {
+      let preloaderImg = document.createElement("img");
+      preloaderImg.src = backgroundPic;
+      preloaderImg.addEventListener("load", event => {
+        setImage(backgroundPic);
+        props.handleLoad();
+        preloaderImg = null;
+      });
+    }
+  });
   return (
-    <Background src={backgroundPic}>
+    <Background src={image}>
       <Midlle>
         <InfoWrapper>
           <Header>О НАС</Header>

@@ -13,7 +13,9 @@ import { Redirect } from "react-router-dom";
 export const routes = [
   {
     path: getPath(VIEWS.MAIN),
-    render: App /*,
+    render: () => (
+      <App />
+    ) /*,
     routes: [
       {
         path: getPath(VIEWS.HOME),

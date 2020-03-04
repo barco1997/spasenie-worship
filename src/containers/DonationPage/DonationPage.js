@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import backgroundPic from "../../static/img/web_fon_5.jpg";
 
@@ -40,8 +40,23 @@ const Input = styled.input`
 `;
 
 function DonationPage(props) {
+  const initialState = {
+    image: null
+  };
+  const [image, setImage] = useState(initialState.image);
+  useEffect(() => {
+    if (!image) {
+      let preloaderImg = document.createElement("img");
+      preloaderImg.src = backgroundPic;
+      preloaderImg.addEventListener("load", event => {
+        setImage(backgroundPic);
+        props.handleLoad();
+        preloaderImg = null;
+      });
+    }
+  });
   return (
-    <Background src={backgroundPic}>
+    <Background src={image}>
       <Midlle>
         <InfoWrapper>
           <Header>СДЕЛАЙ СВОЙ ВКЛАД</Header>
