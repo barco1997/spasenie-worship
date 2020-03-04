@@ -12,11 +12,12 @@ import Loader from "../../components/Loader";
 import smoothscroll from "smoothscroll-polyfill";
 import Footer from "../../components/Footer";
 const Wrapper = styled.div`
-  width: 100vw;
+  width: 100%;
   min-height: 100vh;
   position: relative;
   display: flex;
   flex-direction: column;
+  overflow: hidden;
 `;
 
 function App(props) {
